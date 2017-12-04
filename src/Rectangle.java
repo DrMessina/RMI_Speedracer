@@ -12,7 +12,7 @@ import java.io.Serializable;
  * @author Sam
  * @version 1.0
  */
-public class Rectangle implements Serializable{
+public class Rectangle implements java.io.Serializable {
 
     /**
 	 * 
