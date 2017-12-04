@@ -74,18 +74,6 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 	}
 
 	@Override
-	public void bGameQuitTrue() throws RemoteException {
-		// TODO Auto-generated method stub
-		server.bGameQuitTrue();
-	}
-
-	@Override
-	public void bGameQuitFalse() throws RemoteException {
-		// TODO Auto-generated method stub
-		server.bGameQuitFalse();
-	}
-
-	@Override
 	public void newGrid() throws RemoteException {
 		// TODO Auto-generated method stub
 		server.newGrid();
