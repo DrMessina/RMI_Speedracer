@@ -616,7 +616,7 @@ public class GUI extends javax.swing.JFrame{
 
         //If the game is running, the car has been displayed once and we are not currently busted
         try {
-			if(SpeedRacer.gc.getbGameInProgress() && myCar != null && myCar.bustedTime == 0)
+			if(SpeedRacer.gc.getBGameInProgress() && myCar != null && myCar.bustedTime == 0)
 			{
 			    switch(evt.getKeyCode())
 			    {

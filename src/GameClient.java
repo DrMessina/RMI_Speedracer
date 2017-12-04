@@ -126,9 +126,9 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 	}
 
 	@Override
-	public Boolean getbGameInProgress() throws RemoteException {
+	public Boolean getBGameInProgress() throws RemoteException {
 		// TODO Auto-generated method stub
-		return server.getbGameInProgress();
+		return server.getBGameInProgress();
 	}
 	
 	
