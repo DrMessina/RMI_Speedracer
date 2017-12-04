@@ -40,16 +40,6 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 		Core.score = score;
 	}
 	@Override
-	public void bGameQuitTrue() throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
-	public void bGameQuitFalse() throws RemoteException {
-		// TODO Auto-generated method stub
-		
-	}
-	@Override
 	public void newGrid() throws RemoteException {
 		core.newGrid();
 		
@@ -85,5 +75,39 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 	        LocateRegistry.createRegistry(RMIPortNum);
 	    }
 	  } // end startRegistry
+	@Override
+	public void bGameQuit(boolean isQuitting) throws RemoteException {
+		core.bGameQuit = isQuitting;
+	}
+	@Override
+	public void bGameFinishing(boolean isFinishing) throws RemoteException {
+		// TODO Auto-generated method stub
+		core.bGameFinishing = isFinishing;
+	}
+	@Override
+	public void bGameInProgress(boolean isProgressing) throws RemoteException {
+		// TODO Auto-generated method stub
+		core.bGameInProgress = isProgressing;
+	}
+	@Override
+	public void UP_P(boolean isUp) throws RemoteException {
+		// TODO Auto-generated method stub
+		core.UP_P = isUp;
+	}
+	@Override
+	public void DO_P(boolean isDown) throws RemoteException {
+		// TODO Auto-generated method stub
+		core.DO_P = isDown;
+	}
+	@Override
+	public void RI_P(boolean isRight) throws RemoteException {
+		// TODO Auto-generated method stub
+		core.RI_P = isRight;
+	}
+	@Override
+	public void LE_P(boolean isLeft) throws RemoteException {
+		// TODO Auto-generated method stub
+		core.LE_P = isLeft;
+	}
 	
 }
