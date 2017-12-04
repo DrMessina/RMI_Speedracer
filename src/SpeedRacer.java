@@ -13,7 +13,8 @@ public class SpeedRacer {
     /**
      * A reference to the instance of Core, which does most of the computations
      */
-    public static Core cCore = null;
+   // public static Core cCore = null;
+	public  	IGameSRV GSRV= null;
 
     /**
      * A reference to the instance of GUI, which is in charge of displaying the game status and tracks the pressed keys an buttons
@@ -25,9 +26,8 @@ public class SpeedRacer {
     * @param args the command line arguments
     */
     public static void main(String[] args) {
-
-        try
-        {
+        try{
+        	GSRV = (IGameSRV) new GameClient("//localhost/speedracer");
             //The GUI Thread
             javax.swing.SwingUtilities.invokeAndWait(new Runnable() {
                 @Override public void run() {
@@ -45,9 +45,7 @@ public class SpeedRacer {
                 }
             });
 
-            //The Core
-            cCore = new Core(gGUI);
-            cCore.runGame();
+            GSRV.runGame();
         }
         catch(Exception e)
         {

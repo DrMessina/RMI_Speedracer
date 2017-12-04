@@ -32,5 +32,20 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 		core.setGUI(gui);
 
 	}
+	@Override
+	public void score(int score) throws RemoteException {
+		// TODO Auto-generated method stub
+		Core.score = score;
+	}
+	@Override
+	public void bGameQuitTrue() throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
+	@Override
+	public void bGameQuitFalse() throws RemoteException {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }
