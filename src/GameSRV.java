@@ -128,8 +128,14 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 	@Override
 	public int getID() throws RemoteException {
 		// TODO Auto-generated method stub
-		int i = CoreList.lastKey();
-		return i+1;
+		try {
+			int i = CoreList.lastKey();
+			return i+1;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return 0;
+		}
 	}
 	@Override
 	public Core newCore() throws RemoteException {
