@@ -68,12 +68,6 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 	}
 
 	@Override
-	public void setGui(IGUI gui) throws RemoteException {
-		// TODO Auto-generated method stub
-		server.setGui(gui);
-	}
-
-	@Override
 	public void score(int score) throws RemoteException {
 		// TODO Auto-generated method stub
 		server.score(score);
@@ -96,7 +90,7 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 		// TODO Auto-generated method stub
 		server.newGrid();
 	}
-	public void setGUI(GUI gGUI) {
+	public void setGUI(GUI gGUI) throws RemoteException {
 		this.myGUI = gGUI;
 	}
 }

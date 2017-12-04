@@ -517,7 +517,12 @@ public class GUI extends javax.swing.JFrame {
         jButton1.setEnabled(false);
 
         //Reset the score
-        Core.score = 0;
+        try {
+			SpeedRacer.gc.score(0);
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
         //Initisalize the grid on the server's side
         try {

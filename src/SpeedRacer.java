@@ -1,3 +1,5 @@
+import java.rmi.RemoteException;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -34,7 +36,12 @@ public class SpeedRacer {
 
                     //Create the GUI
                     SpeedRacer.gGUI = new GUI();
-                    	gc.setGUI(gGUI);
+                    	try {
+							gc.setGUI(gGUI);
+						} catch (RemoteException e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
 
                     //Set size and location
                     gGUI.setSize(500, 550);
