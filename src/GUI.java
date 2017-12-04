@@ -329,7 +329,12 @@ public class GUI extends javax.swing.JFrame implements Serializable{
     public void update(Vector<Rectangle> vDisplayRoad, Vector<Rectangle> vDisplayObstacles, Vector<Rectangle> vDisplayCars, Car myCar, int pos, int nbParticipants, boolean bGameOver, String sPosition)
     {
         //Set the player's score
-        jYourScore.setText(SpeedRacer.gc.score()+"");
+        try {
+			jYourScore.setText(SpeedRacer.gc.getScore()+"");
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
         //Updates the kept Car reference and extract its speed
         this.myCar = myCar;
@@ -430,7 +435,7 @@ public class GUI extends javax.swing.JFrame implements Serializable{
             }
 
             //If game is finished, the "Play" button can be pushed again
-            if(!Core.bGameInProgress)
+            if(!SpeedRacer.gc.getBGameInProgress())
             {
                 jButton1.setEnabled(true);
             }
@@ -577,41 +582,46 @@ public class GUI extends javax.swing.JFrame implements Serializable{
     private void formKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyPressed
 
         //If the game is running, the car has been displayed once and we are not currently busted
-        if(Core.bGameInProgress && myCar != null && myCar.bustedTime == 0)
-        {
-            switch(evt.getKeyCode())
-            {
-                case KeyEvent.VK_LEFT : try {
-					SpeedRacer.gc.LE_P(true);
-				} catch (RemoteException e3) {
-					// TODO Auto-generated catch block
-					e3.printStackTrace();
-				}   //Left arrow pressed
-                                    break;
-                case KeyEvent.VK_RIGHT : try {
-					SpeedRacer.gc.RI_P(true);
-				} catch (RemoteException e2) {
-					// TODO Auto-generated catch block
-					e2.printStackTrace();
-				}  //Right arrow pressed
-                                    break;
-                case KeyEvent.VK_UP : try {
-					SpeedRacer.gc.UP_P(true);
-				} catch (RemoteException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}     //Up arrow pressed
-                                    break;
-                case KeyEvent.VK_DOWN : try {
-					SpeedRacer.gc.DO_P(true);
-				} catch (RemoteException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}   //Down arrow pressed
-                                    break;
-                default : break;
-            }
-        }
+        try {
+			if(SpeedRacer.gc.getBGameInProgress() && myCar != null && myCar.bustedTime == 0)
+			{
+			    switch(evt.getKeyCode())
+			    {
+			        case KeyEvent.VK_LEFT : try {
+						SpeedRacer.gc.LE_P(true);
+					} catch (RemoteException e3) {
+						// TODO Auto-generated catch block
+						e3.printStackTrace();
+					}   //Left arrow pressed
+			                            break;
+			        case KeyEvent.VK_RIGHT : try {
+						SpeedRacer.gc.RI_P(true);
+					} catch (RemoteException e2) {
+						// TODO Auto-generated catch block
+						e2.printStackTrace();
+					}  //Right arrow pressed
+			                            break;
+			        case KeyEvent.VK_UP : try {
+						SpeedRacer.gc.UP_P(true);
+					} catch (RemoteException e1) {
+						// TODO Auto-generated catch block
+						e1.printStackTrace();
+					}     //Up arrow pressed
+			                            break;
+			        case KeyEvent.VK_DOWN : try {
+						SpeedRacer.gc.DO_P(true);
+					} catch (RemoteException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}   //Down arrow pressed
+			                            break;
+			        default : break;
+			    }
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
       
     }//GEN-LAST:event_formKeyPressed
 
