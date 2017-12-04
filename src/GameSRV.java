@@ -138,7 +138,12 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 		return c;
 	}
 
-	
+	@Override
+	public void addToCoreList(int key, Core coreAdded) {
+		// TODO Auto-generated method stub
+		CoreList.put(key, coreAdded);
+	}
+
 
 	
 }
