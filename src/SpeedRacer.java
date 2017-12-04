@@ -28,6 +28,9 @@ public class SpeedRacer {
     * @param args the command line arguments
     */
     public static void main(String[] args) {
+    	
+    	
+    	
         try{
         	gc = new GameClient("//localhost/speedracer");
         	

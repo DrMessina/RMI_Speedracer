@@ -4,7 +4,7 @@ import java.util.Vector;
 
 public class GameClient extends java.rmi.server.UnicastRemoteObject implements IGUI, IGameClient{
 
-	private static final long serialVersionUID = -8257530013687833578L;
+	private static final long serialVersionUID = 8257530013687833578L;
 	private GUI myGUI;
 	private IGameSRV server;
 	
@@ -12,6 +12,7 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 		super();
 		// TODO Auto-generated constructor stub
 		connectToServer(address);
+		
 	}
 	
 	/* GUI will call this method when the client needs to locate the server */
@@ -153,6 +154,12 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 	public Core getCore(int key) throws RemoteException {
 		// TODO Auto-generated method stub
 		return server.getCore(key);
+	}
+
+	@Override
+	public void addToCoreList(int key, Core coreAdded) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.addToCoreList(key, coreAdded);
 	}
 	
 	

@@ -19,5 +19,5 @@ public interface IGameSRV extends java.rmi.Remote{
 	public Core newCore() throws java.rmi.RemoteException;
 	public Core getCore(int key) throws java.rmi.RemoteException;
 	public int getID() throws java.rmi.RemoteException;
-	void addToCoreList(int key, Core coreAdded) throws java.rmi.RemoteException;
+	public void addToCoreList(int key, Core coreAdded) throws java.rmi.RemoteException;
 }
