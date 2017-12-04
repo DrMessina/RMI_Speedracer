@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -9,8 +11,13 @@
  * @author Sam
  * @version 1.0
  */
-public class FiniteState {
+public class FiniteState implements Serializable{
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -2059417390493486307L;
+
+	/**
      * The ID of the state (primary key)
      */
     public int iId;

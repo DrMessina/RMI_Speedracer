@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,9 +12,14 @@
  * @author Sam
  * @version 1.0
  */
-public class Rectangle {
+public class Rectangle implements Serializable{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 596049628950687019L;
+
+	/**
      * Rectangle position on the x-axis
      */
     public double x;

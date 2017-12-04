@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,7 +12,7 @@
  * @author Sam
  * @version 1.0
  */
-public class CollidableRectangle extends Rectangle {
+public class CollidableRectangle extends Rectangle implements Serializable{
 
     /**
      * Detemines the effect that a collision with this rectangle has:

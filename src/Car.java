@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -9,9 +11,14 @@
  * @author Sam
  * @version 1.0
  */
-public class Car extends CollidableRectangle {
+public class Car extends CollidableRectangle implements Serializable {
     
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1361970943717929084L;
+
+	/**
      * The Car speed on the x-axis (positive means on the right, negative on the left) ([-8,8])
      */
     public double xSpeed;

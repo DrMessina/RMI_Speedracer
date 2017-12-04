@@ -6,6 +6,8 @@
 
 import java.awt.*;
 import java.awt.image.*;
+import java.io.Serializable;
+
 import javax.swing.*;
 
 /**
@@ -14,9 +16,13 @@ import javax.swing.*;
  * @version 1.0
  * @see JPanel
  */
-public class myJPanel extends JPanel{
+public class myJPanel extends JPanel implements Serializable{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 4298811876141671512L;
+	/**
      * The BufferedImage to paint
      */
     public BufferedImage image;

@@ -13,6 +13,7 @@
 import javax.imageio.*;
 import java.awt.*;
 import java.awt.image.*;
+import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.awt.event.*;
 import java.util.Vector;
@@ -23,9 +24,14 @@ import java.util.Iterator;
  * @author Sam
  * @version 1.0
  */
-public class GUI extends javax.swing.JFrame{
+public class GUI extends javax.swing.JFrame implements Serializable{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = -3147668895625440601L;
+
+	/**
      * The image to refresh
      */
     public BufferedImage image;

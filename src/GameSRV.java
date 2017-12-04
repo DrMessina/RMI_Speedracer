@@ -55,7 +55,7 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
         {
         System.out.println("Fatal: " + e);
 	 e.printStackTrace();
-	 System.exit(1);
+	 //System.exit(1);
         }
      }
 		//This method starts a RMI registry on the local host, if
