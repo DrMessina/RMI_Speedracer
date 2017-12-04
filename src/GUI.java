@@ -13,6 +13,7 @@
 import javax.imageio.*;
 import java.awt.*;
 import java.awt.image.*;
+import java.rmi.RemoteException;
 import java.awt.event.*;
 import java.util.Vector;
 import java.util.Iterator;
@@ -519,7 +520,12 @@ public class GUI extends javax.swing.JFrame {
         Core.score = 0;
 
         //Initisalize the grid on the server's side
-        SpeedRacer.GSRV.newGrid();
+        try {
+			SpeedRacer.gc.newGrid();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         Core.bGameFinishing = false;
         Core.bGameInProgress = true;
 

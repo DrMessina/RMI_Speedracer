@@ -8,5 +8,5 @@ public interface IGameSRV extends java.rmi.Remote{
 	public void score(int score) throws java.rmi.RemoteException;
 	public void bGameQuitTrue() throws java.rmi.RemoteException;
 	public void bGameQuitFalse() throws java.rmi.RemoteException;
-
+	public void newGrid() throws java.rmi.RemoteException;
 }

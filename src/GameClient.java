@@ -11,15 +11,30 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 	protected GameClient(String address) throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
-		try{
-			server = (IGameSRV) java.rmi.Naming.lookup(address);
-        
-			//give the server a remote reference to myself with which it can call me back
-			server.registerClient((IGUI) java.rmi.server.RemoteObject.toStub(this));
-        }catch(Exception e){
-        	System.out.println("failed init Client! " + e);
-        }
+		connectToServer(address);
 	}
+	
+	/* GUI will call this method when the client needs to locate the server */
+	   
+	   public void connectToServer(String address)
+	      {
+	      //look up the server and store a reference to the returned object in a class variable
+		   try{
+				server = (IGameSRV) java.rmi.Naming.lookup(address);
+	        }catch(Exception e){
+	        	System.out.println("failed init Client! " + e + address);
+	        }
+		 //give the server a remote reference to myself with which it can call me back
+			try {
+				server.registerClient((IGUI) java.rmi.server.RemoteObject.toStub(this));
+			} catch (NoSuchObjectException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			} catch (RemoteException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+	      }
 	
 	  /* Methods the server will call on the client */
 	@Override
@@ -48,4 +63,40 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 
 	/*method call by GUI*/
 	
+	public void runGame () throws RemoteException {
+		server.runGame();
+	}
+
+	@Override
+	public void setGui(IGUI gui) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.setGui(gui);
+	}
+
+	@Override
+	public void score(int score) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.score(score);
+	}
+
+	@Override
+	public void bGameQuitTrue() throws RemoteException {
+		// TODO Auto-generated method stub
+		server.bGameQuitTrue();
+	}
+
+	@Override
+	public void bGameQuitFalse() throws RemoteException {
+		// TODO Auto-generated method stub
+		server.bGameQuitFalse();
+	}
+
+	@Override
+	public void newGrid() throws RemoteException {
+		// TODO Auto-generated method stub
+		server.newGrid();
+	}
+	public void setGUI(GUI gGUI) {
+		this.myGUI = gGUI;
+	}
 }
