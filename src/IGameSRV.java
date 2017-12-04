@@ -16,4 +16,7 @@ public interface IGameSRV extends java.rmi.Remote{
 	public boolean getBGameInProgress() throws java.rmi.RemoteException;
 	public void newGrid() throws java.rmi.RemoteException;
 	public int getScore() throws java.rmi.RemoteException;
+	public Core newCore() throws java.rmi.RemoteException;
+	public Core getCore(int key) throws java.rmi.RemoteException;
+	public int getID() throws java.rmi.RemoteException;
 }
