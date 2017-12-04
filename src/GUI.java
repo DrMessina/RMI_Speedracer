@@ -323,7 +323,7 @@ public class GUI extends javax.swing.JFrame{
     public void update(Vector<Rectangle> vDisplayRoad, Vector<Rectangle> vDisplayObstacles, Vector<Rectangle> vDisplayCars, Car myCar, int pos, int nbParticipants, boolean bGameOver, String sPosition)
     {
         //Set the player's score
-        jYourScore.setText(Core.score+"");
+        jYourScore.setText(SpeedRacer.gc.score()+"");
 
         //Updates the kept Car reference and extract its speed
         this.myCar = myCar;
@@ -515,6 +515,7 @@ public class GUI extends javax.swing.JFrame{
 
         //The button cannot be pushed while a game is in progress
         jButton1.setEnabled(false);
+        System.out.println("disable button");
 
         //Reset the score
         try {

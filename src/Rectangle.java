@@ -10,9 +10,14 @@
  * @author Sam
  * @version 1.0
  */
-public class Rectangle {
+public class Rectangle implements java.io.Serializable {
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 596049628950687019L;
+
+	/**
      * Rectangle position on the x-axis
      */
     public double x;
