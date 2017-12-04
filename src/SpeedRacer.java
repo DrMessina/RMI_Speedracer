@@ -30,6 +30,7 @@ public class SpeedRacer {
     public static void main(String[] args) {
         try{
         	gc = new GameClient("//localhost/speedracer");
+        	
             //The GUI Thread
             javax.swing.SwingUtilities.invokeAndWait(new Runnable() {
                 @Override public void run() {

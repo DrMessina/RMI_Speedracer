@@ -15,6 +15,10 @@ import java.io.Serializable;
 public class CollidableRectangle extends Rectangle implements Serializable{
 
     /**
+	 * 
+	 */
+	private static final long serialVersionUID = 596250352425548990L;
+	/**
      * Detemines the effect that a collision with this rectangle has:
      *  0 (block), 1 (bounce), 2 (slow down), 3 (finishes the game), 4 (Speed control)
      */

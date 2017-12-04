@@ -4,7 +4,6 @@
  */
 
 import java.util.Vector;
-import java.lang.reflect.InvocationTargetException;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 
@@ -540,6 +539,7 @@ public class Core {
             {
                 //In case of problem, we only display the exception, but we keep going
                 e.printStackTrace();
+                //supprimer user qui n'est plus dispo
             }
         }
     }
