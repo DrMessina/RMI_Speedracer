@@ -14,4 +14,7 @@ public interface IGameClient extends java.rmi.Remote{
 	public void UP_P(Boolean upPressed) throws java.rmi.RemoteException;
 	public void DO_P(Boolean downPressed) throws java.rmi.RemoteException;
 	public Boolean getBGameInProgress() throws java.rmi.RemoteException;
+	public Core newCore() throws java.rmi.RemoteException;
+	public Core getCore(int key) throws java.rmi.RemoteException;
+	public int getID() throws java.rmi.RemoteException;
 }
