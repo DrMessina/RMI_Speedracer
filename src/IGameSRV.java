@@ -13,5 +13,6 @@ public interface IGameSRV extends java.rmi.Remote{
 	public void DO_P(boolean isDown) throws java.rmi.RemoteException;
 	public void RI_P(boolean isRight) throws java.rmi.RemoteException;
 	public void LE_P(boolean isLeft) throws java.rmi.RemoteException;
+	public boolean getBGameInProgress() throws java.rmi.RemoteException;
 	public void newGrid() throws java.rmi.RemoteException;
 }

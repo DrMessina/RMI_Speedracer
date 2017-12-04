@@ -109,5 +109,10 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 		// TODO Auto-generated method stub
 		core.LE_P = isLeft;
 	}
+	@Override
+	public boolean getBGameInProgress() throws RemoteException {
+		// TODO Auto-generated method stub
+		return core.bGameInProgress;
+	}
 	
 }
