@@ -1788,7 +1788,7 @@ public class Core {
 
         }
         else if(iSegmentId == 13)
-        {        	System.out.println("hello");
+        {
             //001100
             CollidableRectangle crTemp;
             vRoad.add(crTemp = new CollidableRectangle(0,offset,154,400,0,2));  //Herbe à gauche
@@ -1824,7 +1824,6 @@ public class Core {
         }
         else
         {
-        	System.out.println("big bitch");
             //Les autres, juste pour débugger à son aise
             System.out.println("Noting planned for ID : " + iSegmentId);
             System.exit(1);
@@ -1983,6 +1982,9 @@ public class Core {
      */
     public void setGUI(IGUI gui) {
     	this.gGUI = gui;
+    }
+    public int getScore() {
+    	return score;
     }
     
 }

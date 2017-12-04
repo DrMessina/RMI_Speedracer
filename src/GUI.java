@@ -27,11 +27,6 @@ import java.util.Iterator;
 public class GUI extends javax.swing.JFrame implements Serializable{
 
     /**
-	 * 
-	 */
-	private static final long serialVersionUID = -3147668895625440601L;
-
-	/**
      * The image to refresh
      */
     public BufferedImage image;
