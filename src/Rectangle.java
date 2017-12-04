@@ -1,3 +1,5 @@
+import java.io.Serializable;
+
 /*
  * To change this template, choose Tools | Templates
  * and open the template in the editor.
@@ -10,7 +12,11 @@
  * @author Sam
  * @version 1.0
  */
+<<<<<<< HEAD
 public class Rectangle implements java.io.Serializable {
+=======
+public class Rectangle implements Serializable{
+>>>>>>> 9d96d838e4cb39b300e51caec959fec0915d8a03
 
     /**
 	 * 
