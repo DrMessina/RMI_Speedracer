@@ -23,7 +23,7 @@ import java.util.Iterator;
  * @author Sam
  * @version 1.0
  */
-public class GUI extends javax.swing.JFrame {
+public class GUI extends javax.swing.JFrame{
 
     /**
      * The image to refresh
@@ -531,8 +531,18 @@ public class GUI extends javax.swing.JFrame {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        Core.bGameFinishing = false;
-        Core.bGameInProgress = true;
+        try {
+			SpeedRacer.gc.bGameFinishing(false);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+        try {
+			SpeedRacer.gc.bGameInProgress(true);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -542,7 +552,12 @@ public class GUI extends javax.swing.JFrame {
      */
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // Warn the server that we closed the GUI and that it can stop
-        Core.bGameQuit = true;
+        try {
+			SpeedRacer.gc.bGameQuit(true);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         //Delete the GUI
         this.dispose();
@@ -559,13 +574,33 @@ public class GUI extends javax.swing.JFrame {
         {
             switch(evt.getKeyCode())
             {
-                case KeyEvent.VK_LEFT : Core.LE_P = true;   //Left arrow pressed
+                case KeyEvent.VK_LEFT : try {
+					SpeedRacer.gc.LE_P(true);
+				} catch (RemoteException e3) {
+					// TODO Auto-generated catch block
+					e3.printStackTrace();
+				}   //Left arrow pressed
                                     break;
-                case KeyEvent.VK_RIGHT : Core.RI_P = true;  //Right arrow pressed
+                case KeyEvent.VK_RIGHT : try {
+					SpeedRacer.gc.RI_P(true);
+				} catch (RemoteException e2) {
+					// TODO Auto-generated catch block
+					e2.printStackTrace();
+				}  //Right arrow pressed
                                     break;
-                case KeyEvent.VK_UP : Core.UP_P = true;     //Up arrow pressed
+                case KeyEvent.VK_UP : try {
+					SpeedRacer.gc.UP_P(true);
+				} catch (RemoteException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}     //Up arrow pressed
                                     break;
-                case KeyEvent.VK_DOWN : Core.DO_P = true;   //Down arrow pressed
+                case KeyEvent.VK_DOWN : try {
+					SpeedRacer.gc.DO_P(true);
+				} catch (RemoteException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}   //Down arrow pressed
                                     break;
                 default : break;
             }
@@ -580,21 +615,26 @@ public class GUI extends javax.swing.JFrame {
     private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
 
         //If the game is running, the car has been displayed once and we are not currently busted
-        if(Core.bGameInProgress && myCar != null && myCar.bustedTime == 0)
-        {
-            switch(evt.getKeyCode())
-            {
-                case KeyEvent.VK_LEFT : Core.LE_P = false;  //Left arrow released
-                                    break;
-                case KeyEvent.VK_RIGHT : Core.RI_P = false; //Right arrow released
-                                    break;
-                case KeyEvent.VK_UP : Core.UP_P = false;    //Up arrow released
-                                    break;
-                case KeyEvent.VK_DOWN : Core.DO_P = false;  //Down arrow released
-                                    break;
-                default : break;
-            }
-        }
+        try {
+			if(SpeedRacer.gc.getbGameInProgress() && myCar != null && myCar.bustedTime == 0)
+			{
+			    switch(evt.getKeyCode())
+			    {
+			        case KeyEvent.VK_LEFT : SpeedRacer.gc.LE_P(false);  //Left arrow released
+			                            break;
+			        case KeyEvent.VK_RIGHT : SpeedRacer.gc.RI_P(false); //Right arrow released
+			                            break;
+			        case KeyEvent.VK_UP : SpeedRacer.gc.UP_P(false);    //Up arrow released
+			                            break;
+			        case KeyEvent.VK_DOWN : SpeedRacer.gc.DO_P(false);  //Down arrow released
+			                            break;
+			        default : break;
+			    }
+			}
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }//GEN-LAST:event_formKeyReleased
 
 

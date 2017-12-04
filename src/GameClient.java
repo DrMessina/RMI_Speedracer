@@ -93,4 +93,55 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 	public void setGUI(GUI gGUI) throws RemoteException {
 		this.myGUI = gGUI;
 	}
+
+	@Override
+	public void bGameFinishing(Boolean isFinishing) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.bGameFinishing(isFinishing);
+		
+	}
+
+	@Override
+	public void bGameInProgress(Boolean isRunning) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.bGameInProgress(isRunning);
+	}
+
+	@Override
+	public void bGameQuit(Boolean isQuitting) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.bGameQuit(isQuitting);
+	}
+
+	@Override
+	public void LE_P(Boolean leftPressed) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.LE_P(leftPressed);
+	}
+
+	@Override
+	public void RI_P(Boolean rightPressed) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.RI_P(rightPressed);
+	}
+
+	@Override
+	public void UP_P(Boolean upPressed) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.UP_P(upPressed);
+	}
+
+	@Override
+	public void DO_P(Boolean downPressed) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.DO_P(downPressed);
+	}
+
+	@Override
+	public Boolean getbGameInProgress() throws RemoteException {
+		// TODO Auto-generated method stub
+		return server.getbGameInProgress();
+	}
+	
+	
 }
