@@ -2,14 +2,16 @@ import java.net.MalformedURLException;
 import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.HashMap;
+import java.util.SortedMap;
 
 public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGameSRV{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = -1501804357866249049L;
 	private Core core;
+	private SortedMap<Integer, Core> CoreList;
+
+	
 	protected GameSRV() throws RemoteException, MalformedURLException {
 		super();
 		startRegistry(1099);
@@ -119,5 +121,25 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 		// TODO Auto-generated method stub
 		return core.getScore();
 	}
+	@Override
+	public Core getCore(int key) throws RemoteException {
+		// TODO Auto-generated method stub
+		return CoreList.get(key);
+	}
+	@Override
+	public int getID() throws RemoteException {
+		// TODO Auto-generated method stub
+		int i = CoreList.lastKey();
+		return i+1;
+	}
+	@Override
+	public Core newCore() throws RemoteException {
+		// TODO Auto-generated method stub
+		Core c = new Core();
+		return c;
+	}
+
+	
+
 	
 }
