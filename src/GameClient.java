@@ -7,12 +7,29 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 	private static final long serialVersionUID = 8257530013687833578L;
 	private GUI myGUI;
 	private IGameSRV server;
+	int coreID;
+	Core myCore;
 	
 	protected GameClient(String address) throws RemoteException {
 		super();
 		// TODO Auto-generated constructor stub
 		connectToServer(address);
+		coreID = getFutureID();
+		System.out.println("connected to server");
+		System.out.println(coreID);
 		
+		//give the server a remote reference to myself with which it can call me back
+		try {
+			System.out.println("register to server");
+			System.out.println(coreID);
+			server.registerClient((IGUI) java.rmi.server.RemoteObject.toStub(this), coreID);
+		} catch (NoSuchObjectException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 	/* GUI will call this method when the client needs to locate the server */
@@ -25,16 +42,6 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 	        }catch(Exception e){
 	        	System.out.println("failed init Client! " + e + address);
 	        }
-		 //give the server a remote reference to myself with which it can call me back
-			try {
-				server.registerClient((IGUI) java.rmi.server.RemoteObject.toStub(this));
-			} catch (NoSuchObjectException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			} catch (RemoteException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 	      }
 	
 	  /* Methods the server will call on the client */
@@ -64,78 +71,80 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 
 	/*method call by GUI*/
 	
-	public void runGame () throws RemoteException {
-		server.runGame();
+	public void runGame (int coreId) throws RemoteException {
+		server.runGame(coreId);
 	}
 
 	@Override
-	public void score(int score) throws RemoteException {
+	public void score(int score, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		server.score(score);
+		server.score(score, coreId);
 	}
 
 	@Override
-	public void newGrid() throws RemoteException {
+	public void newGrid(int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		server.newGrid();
+		server.newGrid(coreId);
 	}
-	public void setGUI(GUI gGUI) throws RemoteException {
+	public void setGUI(GUI gGUI, int coreId) throws RemoteException {
 		this.myGUI = gGUI;
 	}
 
 	@Override
-	public void bGameFinishing(Boolean isFinishing) throws RemoteException {
+	public void bGameFinishing(Boolean isFinishing, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		server.bGameFinishing(isFinishing);
+		server.bGameFinishing(isFinishing, coreId);
 		
 	}
 
 	@Override
-	public void bGameInProgress(Boolean isRunning) throws RemoteException {
+	public void bGameInProgress(Boolean isRunning, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		server.bGameInProgress(isRunning);
+		server.bGameInProgress(isRunning, coreId);
 	}
 
 	@Override
-	public void bGameQuit(Boolean isQuitting) throws RemoteException {
+	public void bGameQuit(Boolean isQuitting, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		server.bGameQuit(isQuitting);
+		server.bGameQuit(isQuitting, coreId);
 	}
 
 	@Override
-	public void LE_P(Boolean leftPressed) throws RemoteException {
+	public void LE_P(Boolean leftPressed, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		server.LE_P(leftPressed);
+		server.LE_P(leftPressed, coreId);
 	}
 
 	@Override
-	public void RI_P(Boolean rightPressed) throws RemoteException {
+	public void RI_P(Boolean rightPressed, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		server.RI_P(rightPressed);
+		server.RI_P(rightPressed, coreId);
 	}
 
 	@Override
-	public void UP_P(Boolean upPressed) throws RemoteException {
+	public void UP_P(Boolean upPressed, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		server.UP_P(upPressed);
+		server.UP_P(upPressed, coreId);
+		System.out.println("accélérer");
+		System.out.println(coreID);
 	}
 
 	@Override
-	public void DO_P(Boolean downPressed) throws RemoteException {
+	public void DO_P(Boolean downPressed, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		server.DO_P(downPressed);
+		server.DO_P(downPressed, coreId);
 	}
 
 	@Override
-	public Boolean getBGameInProgress() throws RemoteException {
+	public Boolean getBGameInProgress(int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		return server.getBGameInProgress();
+		return server.getBGameInProgress(coreId);
 	}
 
 	@Override
-	public int getScore() throws RemoteException {
+	public int getScore(int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		return server.getScore();
+		return server.getScore(coreId);
 	}
 
 	@Override
@@ -145,21 +154,21 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 	}
 
 	@Override
-	public Core newCore() throws RemoteException {
-		// TODO Auto-generated method stub
-		return server.newCore();
-	}
-
-	@Override
 	public Core getCore(int key) throws RemoteException {
 		// TODO Auto-generated method stub
 		return server.getCore(key);
 	}
 
 	@Override
-	public void addToCoreList(int key, Core coreAdded) throws RemoteException {
+	public Core newCore(int key) throws RemoteException {
 		// TODO Auto-generated method stub
-		server.addToCoreList(key, coreAdded);
+		return server.newCore(key);
+	}
+
+	@Override
+	public int getFutureID() throws RemoteException {
+		// TODO Auto-generated method stub
+		return server.getFutureID();
 	}
 	
 	

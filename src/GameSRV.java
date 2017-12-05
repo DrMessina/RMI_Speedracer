@@ -3,6 +3,7 @@ import java.rmi.*;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.util.SortedMap;
+import java.util.TreeMap;
 
 public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGameSRV{
 
@@ -16,33 +17,51 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 		startRegistry(1099);
 		java.rmi.Naming.rebind("//localhost/speedracer", this);
 		System.out.println("server started");
-		core = new Core();
-	}
-	@Override
-	public synchronized void registerClient(IGUI gGUI) throws RemoteException {
-		// TODO Auto-generated method stub
-		core.setGUI(gGUI);
-	}
-	@Override
-	public void runGame() throws RemoteException {
-		// TODO Auto-generated method stub
-		core.runGame();
+		CoreList = new TreeMap<Integer, Core>();
+		//core = newCore(0);
+	
 	}
 	
 	@Override
-	public void setGui(IGUI gui) throws RemoteException {
+	public synchronized void registerClient(IGUI gGUI, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		core.setGUI(gui);
+		try {
+			core = newCore(coreId);
+			System.out.println(coreId);
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			System.out.println("Erreur création core ");
+			e1.printStackTrace();
+		}
+		getCore(coreId).setGUI(gGUI);
+		
+	}
+	@Override
+	public void runGame(int coreId) throws RemoteException {
+		// TODO Auto-generated method stub
+		getCore(coreId).runGame();
+		System.out.println("runGame");
+		System.out.println(coreId);
+	}
+	
+	@Override
+	public void setGui(IGUI gui, int coreId) throws RemoteException {
+		// TODO Auto-generated method stub
+		getCore(coreId).setGUI(gui);
+		System.out.println("setGui");
+		System.out.println(coreId);
 
 	}
 	@Override
-	public void score(int score) throws RemoteException {
+	public void score(int score, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		Core.score = score;
+		getCore(coreId).score = score;
+		System.out.println("set score");
+		System.out.println(coreId);
 	}
 	@Override
-	public void newGrid() throws RemoteException {
-		core.newGrid();
+	public void newGrid(int coreId) throws RemoteException {
+		getCore(coreId).newGrid();
 		
 	}
 	
@@ -77,77 +96,92 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 	    }
 	  } // end startRegistry
 	@Override
-	public void bGameQuit(boolean isQuitting) throws RemoteException {
-		core.bGameQuit = isQuitting;
+	public void bGameQuit(boolean isQuitting, int coreId) throws RemoteException {
+		getCore(coreId).bGameQuit = isQuitting;
 	}
 	@Override
-	public void bGameFinishing(boolean isFinishing) throws RemoteException {
+	public void bGameFinishing(boolean isFinishing, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		core.bGameFinishing = isFinishing;
+		getCore(coreId).bGameFinishing = isFinishing;
 	}
 	@Override
-	public void bGameInProgress(boolean isProgressing) throws RemoteException {
+	public void bGameInProgress(boolean isProgressing, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		core.bGameInProgress = isProgressing;
+		getCore(coreId).bGameInProgress = isProgressing;
 	}
 	@Override
-	public void UP_P(boolean isUp) throws RemoteException {
+	public void UP_P(boolean isUp, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		core.UP_P = isUp;
+		getCore(coreId).UP_P = isUp;
 	}
 	@Override
-	public void DO_P(boolean isDown) throws RemoteException {
+	public void DO_P(boolean isDown, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		core.DO_P = isDown;
+		getCore(coreId).DO_P = isDown;
 	}
 	@Override
-	public void RI_P(boolean isRight) throws RemoteException {
+	public void RI_P(boolean isRight, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		core.RI_P = isRight;
+		getCore(coreId).RI_P = isRight;
 	}
 	@Override
-	public void LE_P(boolean isLeft) throws RemoteException {
+	public void LE_P(boolean isLeft, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		core.LE_P = isLeft;
+		getCore(coreId).LE_P = isLeft;
 	}
 	@Override
-	public boolean getBGameInProgress() throws RemoteException {
+	public boolean getBGameInProgress(int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		return core.bGameInProgress;
+		return getCore(coreId).bGameInProgress;
 	}
 	@Override
-	public int getScore() throws RemoteException {
+	public int getScore(int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
-		return core.getScore();
+		return getCore(coreId).getScore();
 	}
 	@Override
 	public Core getCore(int key) throws RemoteException {
 		// TODO Auto-generated method stub
 		return CoreList.get(key);
 	}
+	
+	public int getFutureID() throws RemoteException {
+		// TODO Auto-generated method stub
+		try {
+			int i = CoreList.lastKey();
+			System.out.println("last kay");
+			System.out.println(i+1);
+			return i+1;
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			System.out.println("Return 0 key");
+			//e.printStackTrace();
+			return 0;
+		}
+	}
+	
 	@Override
 	public int getID() throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
 			int i = CoreList.lastKey();
-			return i+1;
+			System.out.println("getID");
+			System.out.println(i);
+			return i;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			e.printStackTrace();
+			System.out.println("Return 0 key");
+			//e.printStackTrace();
 			return 0;
 		}
 	}
 	@Override
-	public Core newCore() throws RemoteException {
+	public Core newCore(int key) throws RemoteException {
 		// TODO Auto-generated method stub
+		System.out.println(key);
 		Core c = new Core();
+		CoreList.put(key, c);
 		return c;
-	}
-
-	@Override
-	public void addToCoreList(int key, Core coreAdded) {
-		// TODO Auto-generated method stub
-		CoreList.put(key, coreAdded);
 	}
 
 

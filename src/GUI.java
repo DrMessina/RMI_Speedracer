@@ -45,6 +45,8 @@ public class GUI extends javax.swing.JFrame implements Serializable{
      * A copy of the instance of the car that the player controls
      */
     public Car myCar;
+    
+    public int coreId;
 
     /**
      * Constructor
@@ -53,6 +55,13 @@ public class GUI extends javax.swing.JFrame implements Serializable{
     {
         //Calls the private method which initializes the panels, the buttons, etc...
         initComponents();
+        
+        try {
+			coreId = SpeedRacer.gc.getID();
+		} catch (RemoteException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 
         //Creation of the BufferedImage
         image = new BufferedImage(400, 400, BufferedImage.TYPE_INT_ARGB);
@@ -325,7 +334,9 @@ public class GUI extends javax.swing.JFrame implements Serializable{
     {
         //Set the player's score
         try {
-			jYourScore.setText(SpeedRacer.gc.getScore()+"");
+			jYourScore.setText(SpeedRacer.gc.getScore(coreId)+"");
+			System.out.println("Score selector");
+			System.out.println(coreId);
 		} catch (RemoteException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -430,7 +441,7 @@ public class GUI extends javax.swing.JFrame implements Serializable{
             }
 
             //If game is finished, the "Play" button can be pushed again
-            if(!SpeedRacer.gc.getBGameInProgress())
+            if(!SpeedRacer.gc.getBGameInProgress(coreId))
             {
                 jButton1.setEnabled(true);
             }
@@ -525,7 +536,7 @@ public class GUI extends javax.swing.JFrame implements Serializable{
 
         //Reset the score
         try {
-			SpeedRacer.gc.score(0);
+			SpeedRacer.gc.score(0, coreId);
 		} catch (RemoteException e1) {
 			// TODO Auto-generated catch block
 			e1.printStackTrace();
@@ -533,19 +544,19 @@ public class GUI extends javax.swing.JFrame implements Serializable{
 
         //Initisalize the grid on the server's side
         try {
-			SpeedRacer.gc.newGrid();
+			SpeedRacer.gc.newGrid(coreId);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         try {
-			SpeedRacer.gc.bGameFinishing(false);
+			SpeedRacer.gc.bGameFinishing(false, coreId);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
         try {
-			SpeedRacer.gc.bGameInProgress(true);
+			SpeedRacer.gc.bGameInProgress(true, coreId);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -560,7 +571,7 @@ public class GUI extends javax.swing.JFrame implements Serializable{
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         // Warn the server that we closed the GUI and that it can stop
         try {
-			SpeedRacer.gc.bGameQuit(true);
+			SpeedRacer.gc.bGameQuit(true, coreId);
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -578,33 +589,33 @@ public class GUI extends javax.swing.JFrame implements Serializable{
 
         //If the game is running, the car has been displayed once and we are not currently busted
         try {
-			if(SpeedRacer.gc.getBGameInProgress() && myCar != null && myCar.bustedTime == 0)
+			if(SpeedRacer.gc.getBGameInProgress(coreId) && myCar != null && myCar.bustedTime == 0)
 			{
 			    switch(evt.getKeyCode())
 			    {
 			        case KeyEvent.VK_LEFT : try {
-						SpeedRacer.gc.LE_P(true);
+						SpeedRacer.gc.LE_P(true, coreId);
 					} catch (RemoteException e3) {
 						// TODO Auto-generated catch block
 						e3.printStackTrace();
 					}   //Left arrow pressed
 			                            break;
 			        case KeyEvent.VK_RIGHT : try {
-						SpeedRacer.gc.RI_P(true);
+						SpeedRacer.gc.RI_P(true, coreId);
 					} catch (RemoteException e2) {
 						// TODO Auto-generated catch block
 						e2.printStackTrace();
 					}  //Right arrow pressed
 			                            break;
 			        case KeyEvent.VK_UP : try {
-						SpeedRacer.gc.UP_P(true);
+						SpeedRacer.gc.UP_P(true, coreId);
 					} catch (RemoteException e1) {
 						// TODO Auto-generated catch block
 						e1.printStackTrace();
 					}     //Up arrow pressed
 			                            break;
 			        case KeyEvent.VK_DOWN : try {
-						SpeedRacer.gc.DO_P(true);
+						SpeedRacer.gc.DO_P(true, coreId);
 					} catch (RemoteException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -628,17 +639,17 @@ public class GUI extends javax.swing.JFrame implements Serializable{
 
         //If the game is running, the car has been displayed once and we are not currently busted
         try {
-			if(SpeedRacer.gc.getBGameInProgress() && myCar != null && myCar.bustedTime == 0)
+			if(SpeedRacer.gc.getBGameInProgress(coreId) && myCar != null && myCar.bustedTime == 0)
 			{
 			    switch(evt.getKeyCode())
 			    {
-			        case KeyEvent.VK_LEFT : SpeedRacer.gc.LE_P(false);  //Left arrow released
+			        case KeyEvent.VK_LEFT : SpeedRacer.gc.LE_P(false, coreId);  //Left arrow released
 			                            break;
-			        case KeyEvent.VK_RIGHT : SpeedRacer.gc.RI_P(false); //Right arrow released
+			        case KeyEvent.VK_RIGHT : SpeedRacer.gc.RI_P(false, coreId); //Right arrow released
 			                            break;
-			        case KeyEvent.VK_UP : SpeedRacer.gc.UP_P(false);    //Up arrow released
+			        case KeyEvent.VK_UP : SpeedRacer.gc.UP_P(false, coreId);    //Up arrow released
 			                            break;
-			        case KeyEvent.VK_DOWN : SpeedRacer.gc.DO_P(false);  //Down arrow released
+			        case KeyEvent.VK_DOWN : SpeedRacer.gc.DO_P(false, coreId);  //Down arrow released
 			                            break;
 			        default : break;
 			    }

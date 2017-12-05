@@ -29,11 +29,9 @@ public class SpeedRacer {
     */
     public static void main(String[] args) {
     	
-    	
-    	
         try{
         	gc = new GameClient("//localhost/speedracer");
-        	
+        	int coreId = gc.getID();
             //The GUI Thread
             javax.swing.SwingUtilities.invokeAndWait(new Runnable() {
                 @Override public void run() {
@@ -41,7 +39,9 @@ public class SpeedRacer {
                     //Create the GUI
                     SpeedRacer.gGUI = new GUI();
                     	try {
-							gc.setGUI(gGUI);
+							gc.setGUI(gGUI, coreId);
+							System.out.println("GUI id");
+							System.out.println(coreId);
 						} catch (RemoteException e) {
 							// TODO Auto-generated catch block
 							e.printStackTrace();
@@ -56,10 +56,11 @@ public class SpeedRacer {
 
                 }
             });
-            gc.runGame();
+            gc.runGame(coreId);
         }
         catch(Exception e)
         {
+        		System.out.println("gameclient error");
             e.printStackTrace();
         }
 
