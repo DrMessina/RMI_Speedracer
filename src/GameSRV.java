@@ -15,7 +15,7 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 	protected GameSRV() throws RemoteException, MalformedURLException {
 		super();
 		startRegistry(1099);
-		java.rmi.Naming.rebind("//192.168.1.37/speedracer", this);
+		java.rmi.Naming.rebind("//10.113.101.78/speedracer", this);
 		System.out.println("server started");
 		CoreList = new TreeMap<Integer, Core>();
 		//core = newCore(0);

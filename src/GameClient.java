@@ -4,15 +4,32 @@ import java.util.Vector;
 
 public class GameClient extends java.rmi.server.UnicastRemoteObject implements IGUI, IGameClient{
 
+	/**
+	 * Serialisable class
+	 */
 	private static final long serialVersionUID = 8257530013687833578L;
-	private GUI myGUI;
-	private IGameSRV server;
-	int coreID;
-	Core myCore;
 	
+	/**
+	 * A reference to the graphical user interface
+	 */
+	private GUI myGUI;
+	
+	/**
+	 * A reference to the game server interface
+	 */
+	private IGameSRV server;
+	
+	/**
+	 * The coreID indication to differentiate the different instances
+	 */
+	int coreID;
+	
+	/**
+	 * The GameClient constructor that initiates the server connection
+	 */
 	protected GameClient(String address) throws RemoteException {
 		super();
-		// TODO Auto-generated constructor stub
+		//
 		connectToServer(address);
 		coreID = getFutureID();
 		System.out.println("connected to server");

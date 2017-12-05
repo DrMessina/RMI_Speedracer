@@ -138,12 +138,7 @@ public class Core extends GameSRV{
     
    /**
     * Constructor
-    * @param gGUI The reference to the graphical user interface
     */
-   /* public Core(GUI gGUI)
-    {
-        this.gGUI = gGUI;
-    }*/
     public Core() throws MalformedURLException, RemoteException{}
 
     /**

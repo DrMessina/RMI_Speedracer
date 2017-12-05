@@ -14,7 +14,7 @@ import java.io.Serializable;
 public class Car extends CollidableRectangle implements Serializable {
     
     /**
-	 * 
+	 * Serialisable class
 	 */
 	private static final long serialVersionUID = 1361970943717929084L;
 
