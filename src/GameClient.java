@@ -160,9 +160,9 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 	}
 
 	@Override
-	public Core newCore(int key) throws RemoteException {
+	public void newCore(int key) throws RemoteException {
 		// TODO Auto-generated method stub
-		return server.newCore(key);
+		server.newCore(key);
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class SpeedRacer {
     public static void main(String[] args) {
     	
         try{
-        	gc = new GameClient("//192.168.1.25/speedracer");
+        	gc = new GameClient("//192.168.1.37/speedracer");
         	int coreId = gc.getID();
             //The GUI Thread
             javax.swing.SwingUtilities.invokeAndWait(new Runnable() {

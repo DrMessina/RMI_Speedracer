@@ -15,7 +15,7 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 	protected GameSRV() throws RemoteException, MalformedURLException {
 		super();
 		startRegistry(1099);
-		java.rmi.Naming.rebind("//192.168.1.25/speedracer", this);
+		java.rmi.Naming.rebind("//192.168.1.37/speedracer", this);
 		System.out.println("server started");
 		CoreList = new TreeMap<Integer, Core>();
 		//core = newCore(0);
@@ -26,7 +26,7 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 	public synchronized void registerClient(IGUI gGUI, int coreId) throws RemoteException {
 		// TODO Auto-generated method stub
 		try {
-			core = newCore(coreId);
+			newCore(coreId);
 			System.out.println(coreId);
 		} catch (RemoteException e1) {
 			// TODO Auto-generated catch block
@@ -154,7 +154,7 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 			return i+1;
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			System.out.println("Return 0 key");
+			System.out.println("Return 0 future key");
 			//e.printStackTrace();
 			return 0;
 		}
@@ -176,12 +176,11 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 		}
 	}
 	@Override
-	public Core newCore(int key) throws RemoteException {
+	public void newCore(int key) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println(key);
 		Core c = new Core();
 		CoreList.put(key, c);
-		return c;
 	}
 
 
