@@ -576,7 +576,12 @@ public class GUI extends javax.swing.JFrame implements Serializable{
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
+        try {
+			SpeedRacer.gc.deleteCore(coreId);
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         //Delete the GUI
         this.dispose();
     }//GEN-LAST:event_formWindowClosing

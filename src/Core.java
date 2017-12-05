@@ -4,6 +4,7 @@
  */
 
 import java.util.Vector;
+import java.net.MalformedURLException;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 
@@ -12,12 +13,12 @@ import java.util.Iterator;
  * @author Sam
  * @version 1.0
  */
-public class Core {
+public class Core extends GameSRV{
 
     /**
      * The player's score
      */
-    public static int score = 0;
+    public int score = 0;
 
     /**
      * The delay in ms between two loops
@@ -27,37 +28,37 @@ public class Core {
     /**
      * True if the finish line has been passed. False otherwise
      */
-    public static boolean bGameFinishing = false;
+    public boolean bGameFinishing = false;
 
     /**
      * True if the player is currently playing. False otherwise
      */
-    public static boolean bGameInProgress = false;
+    public boolean bGameInProgress = false;
 
     /**
      * True if the GUI is closing. False otherwise
      */
-    public static boolean bGameQuit = false;
+    public boolean bGameQuit = false;
 
     /**
      * True if the player is pressing the up arrow key
      */
-    public static boolean UP_P = false;
+    public boolean UP_P = false;
 
     /**
      * True if the player is pressing the down arrow key
      */
-    public static boolean DO_P = false;
+    public boolean DO_P = false;
 
     /**
      * True if the player is pressing the right arrow key
      */
-    public static boolean RI_P = false;
+    public boolean RI_P = false;
 
     /**
      * True if the player is pressing the left arrow key
      */
-    public static boolean LE_P = false;
+    public boolean LE_P = false;
 
     /**
      * The string representing the final position (rank) of the player after passing the finish line
@@ -143,7 +144,7 @@ public class Core {
     {
         this.gGUI = gGUI;
     }*/
-    public Core() {}
+    public Core() throws MalformedURLException, RemoteException{}
 
     /**
      * Initializes the finite state machine and stores it in fsStates[].
@@ -523,8 +524,8 @@ public class Core {
                         iFinalPosition = pos;
                     }
                     
-                   gGUI.update(vDisplayRoad, vDisplayObstacles, vDisplayCars, vCars.elementAt(0), iFinalPosition, iNbParticipants, bGameFinishing, sFinalPosition);
-
+					gGUI.update(vDisplayRoad, vDisplayObstacles, vDisplayCars, vCars.elementAt(0), iFinalPosition, iNbParticipants, bGameFinishing, sFinalPosition);
+				
                 }
 
                 //The score updates every second if the game is running by adding the square of the current player car speed
@@ -538,8 +539,7 @@ public class Core {
             catch(Exception e)
             {
                 //In case of problem, we only display the exception, but we keep going
-                e.printStackTrace();
-                //supprimer user qui n'est plus dispo
+            	e.printStackTrace();
             }
         }
     }

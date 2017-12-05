@@ -170,6 +170,12 @@ public class GameClient extends java.rmi.server.UnicastRemoteObject implements I
 		// TODO Auto-generated method stub
 		return server.getFutureID();
 	}
+
+	@Override
+	public void deleteCore(int coreId) throws RemoteException {
+		// TODO Auto-generated method stub
+		server.deleteCore(coreId);
+	}
 	
 	
 }

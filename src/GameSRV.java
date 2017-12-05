@@ -9,7 +9,7 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 
 	private static final long serialVersionUID = -1501804357866249049L;
 	private Core core;
-	private SortedMap<Integer, Core> CoreList;
+	public SortedMap<Integer, Core> CoreList;
 
 	
 	protected GameSRV() throws RemoteException, MalformedURLException {
@@ -179,9 +179,24 @@ public class GameSRV extends java.rmi.server.UnicastRemoteObject implements IGam
 	public void newCore(int key) throws RemoteException {
 		// TODO Auto-generated method stub
 		System.out.println(key);
-		Core c = new Core();
+		Core c = null;
+		try {
+			c = new Core();
+		} catch (MalformedURLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		CoreList.put(key, c);
 	}
+
+	@Override
+	public void deleteCore(int coreId) throws RemoteException {
+		// TODO Auto-generated method stub
+		CoreList.remove(coreId);
+		System.out.println("core deleted");
+	}
+	
+	
 
 
 	

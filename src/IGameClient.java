@@ -18,4 +18,5 @@ public interface IGameClient extends java.rmi.Remote{
 	public Core getCore(int key) throws java.rmi.RemoteException;
 	public int getID() throws java.rmi.RemoteException;
 	public int getFutureID() throws java.rmi.RemoteException;
+	public void deleteCore(int coreId) throws java.rmi.RemoteException;
 	}
